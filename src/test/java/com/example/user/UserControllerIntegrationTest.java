@@ -1,6 +1,6 @@
 package com.example.user;
 
-import com.example.CustomPostgresqlContainer;
+import com.example.IntegrationTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 
-public class UserControllerIntegrationTest extends CustomPostgresqlContainer {
+public class UserControllerIntegrationTest extends IntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
