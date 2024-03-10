@@ -1,6 +1,5 @@
 package com.example.exception;
 
-import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -27,15 +26,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body(ex.getMessage()), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity handleValidationExceptions(ConstraintViolationException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getConstraintViolations().forEach((error) -> {
-            String fieldName = error.getPropertyPath().toString();
-            String errorMessage = error.getMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return new ResponseEntity<>(body(errors.toString()), HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(value = ClientNotFoundException.class)
+    public ResponseEntity handleClientNotFoundException(ClientNotFoundException ex) {
+        return new ResponseEntity<>(body(ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = DeliveryNotFoundException.class)
+    public ResponseEntity handleDeliveryNotFoundException(DeliveryNotFoundException ex) {
+        return new ResponseEntity<>(body(ex.getMessage()), HttpStatus.NOT_FOUND);
     }
 
     private Map<String, String> body(String message) {
