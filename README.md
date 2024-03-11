@@ -20,5 +20,7 @@ To start the project:
 Additional features:
 - Unit and integration tests
 - API documentation
-- API security implementation  
+- API security implementation
+- Add DockerFile
+- Add gitlab-ci example file
   
