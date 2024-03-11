@@ -1,0 +1,24 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  DEPLOY_USER: your_deploy_user
+  DEPLOY_SERVER: your_deploy_server
+  JAR_NAME: delivery.jar
+
+build:
+  stage: build
+  script:
+    - ./mvnw package -DskipTests
+  artifacts:
+    paths:
+      - target/*.jar
+
+deploy:
+  stage: deploy
+  script:
+    - scp target/$JAR_NAME $DEPLOY_USER@$DEPLOY_SERVER:/path/to/destination
+    - ssh $DEPLOY_USER@$DEPLOY_SERVER 'systemctl restart delivery-application.service'
+  only:
+    - master
